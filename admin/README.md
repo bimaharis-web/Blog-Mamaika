@@ -19,6 +19,6 @@ Panel admin memakai Decap CMS dan Decap Turbo untuk autentikasi serta akses GitH
 
 ## Menulis artikel
 
-Di panel admin, buka **Artikel → New Artikel**. Isi judul, tanggal terbit, kategori, ringkasan, gambar, deskripsi gambar, dan isi artikel. Simpan untuk menerbitkan perubahan ke `main`; GitHub Pages akan membangun ulang blog secara otomatis.
+Di panel admin, buka **Artikel → New Artikel**. Isi judul, tanggal terbit, kategori, ringkasan, dan isi artikel. Gambar artikel serta deskripsinya bersifat opsional. Simpan untuk menerbitkan perubahan ke `main`; GitHub Pages akan membangun ulang blog secara otomatis.
 
 Paket gratis Decap Turbo saat ini menyediakan satu site dan satu seat. Periksa halaman paket Decap Turbo untuk ketentuan terbaru.
