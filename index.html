@@ -146,18 +146,55 @@
         background: #fff;
         box-shadow: 0 14px 40px #3b21180a;
       }
-      .article-card:first-child { grid-column: 1 / -1; }
-      .article-card:first-child .article-top {
+      .category-browser {
+        display: grid;
+        gap: 13px;
+        margin: 0 0 26px;
+      }
+      .category-browser h3 { margin: 0; font: 600 17px/1.3 var(--serif); }
+      .category-filters { display: flex; flex-wrap: wrap; gap: 9px; }
+      .category-filter {
+        padding: 9px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: var(--brown-soft);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        transition: background-color .2s, color .2s, border-color .2s;
+      }
+      .category-filter:hover, .category-filter:focus-visible {
+        border-color: var(--orange);
+        color: var(--orange);
+      }
+      .category-filter[aria-pressed="true"] {
+        border-color: var(--orange);
+        background: var(--orange);
+        color: #fff;
+      }
+      .article-count { margin: 0; color: var(--brown-soft); font-size: 12px; }
+      .empty-state {
+        margin: 0 0 54px;
+        padding: 28px;
+        border: 1px dashed var(--line);
+        border-radius: 16px;
+        color: var(--brown-soft);
+        font-size: 14px;
+        text-align: center;
+      }
+      .article-card.featured { grid-column: 1 / -1; }
+      .article-card.featured .article-top {
         display: grid;
         min-height: 300px;
         grid-template-columns: 1fr 1fr;
       }
       .article-image { min-height: 210px; background: var(--cream); }
-      .article-card:first-child .article-image { height: 100%; }
+      .article-card.featured .article-image { height: 100%; }
       .article-image img { width: 100%; height: 100%; min-height: inherit; object-fit: cover; }
-      .article-card:first-child .article-image img { min-height: 300px; }
+      .article-card.featured .article-image img { min-height: 300px; }
       .article-copy { padding: 28px; }
-      .article-card:first-child .article-copy { align-self: center; padding: 38px clamp(28px, 5vw, 64px); }
+      .article-card.featured .article-copy { align-self: center; padding: 38px clamp(28px, 5vw, 64px); }
       .category {
         display: inline-block;
         margin-bottom: 13px;
@@ -171,7 +208,7 @@
         text-transform: uppercase;
       }
       h3 { margin-bottom: 11px; font: 600 25px/1.25 var(--serif); }
-      .article-card:first-child h3 { font-size: clamp(28px, 3.3vw, 38px); }
+      .article-card.featured h3 { font-size: clamp(28px, 3.3vw, 38px); }
       .article-body h4 { margin: 22px 0 8px; color: var(--brown); font: 600 19px/1.3 var(--serif); }
       .article-body a { color: var(--orange-dark, #bd4900); text-decoration: underline; text-underline-offset: 3px; }
       .article-summary, .article-body {
@@ -233,12 +270,15 @@
         .hero-copy > p:last-child { font-size: 15px; }
         .section-heading { align-items: start; flex-direction: column; padding-top: 52px; }
         .section-heading > p { max-width: 480px; }
+        .category-browser { margin-bottom: 20px; }
+        .category-filters { gap: 7px; }
+        .category-filter { padding: 8px 11px; }
         .articles { grid-template-columns: 1fr; gap: 16px; padding-bottom: 54px; }
-        .article-card:first-child { grid-column: auto; }
-        .article-card:first-child .article-top { grid-template-columns: 1fr; }
-        .article-card:first-child .article-image { max-height: 250px; }
-        .article-card:first-child .article-image img { min-height: 230px; max-height: 250px; }
-        .article-copy, .article-card:first-child .article-copy { padding: 24px; }
+        .article-card.featured { grid-column: auto; }
+        .article-card.featured .article-top { grid-template-columns: 1fr; }
+        .article-card.featured .article-image { max-height: 250px; }
+        .article-card.featured .article-image img { min-height: 230px; max-height: 250px; }
+        .article-copy, .article-card.featured .article-copy { padding: 24px; }
         footer { flex-direction: column; }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -270,20 +310,35 @@
       <section class="content" aria-labelledby="articles-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Dari Jurnal Mamaika</p>
+            <p class="eyebrow">BLOG · Jurnal Mamaika</p>
             <h2 id="articles-title">Baca seputar aqiqah</h2>
           </div>
           <p>Beberapa bacaan pilihan untuk menemani keluarga menyiapkan hari istimewa si kecil.</p>
         </div>
 
+        <nav class="category-browser" aria-label="Kategori artikel blog">
+          <h3>Jelajahi kategori BLOG</h3>
+          <div class="category-filters" role="group" aria-label="Pilih kategori artikel">
+            <button class="category-filter" type="button" data-category-filter="all" aria-pressed="true">Semua artikel</button>
+            <button class="category-filter" type="button" data-category-filter="panduan-aqiqah" aria-pressed="false">Panduan Aqiqah</button>
+            <button class="category-filter" type="button" data-category-filter="persiapan-aqiqah" aria-pressed="false">Persiapan Aqiqah</button>
+            <button class="category-filter" type="button" data-category-filter="menu-aqiqah" aria-pressed="false">Menu Aqiqah</button>
+            <button class="category-filter" type="button" data-category-filter="doa-ibadah" aria-pressed="false">Doa &amp; Ibadah</button>
+            <button class="category-filter" type="button" data-category-filter="keluarga-muslim" aria-pressed="false">Keluarga Muslim</button>
+            <button class="category-filter" type="button" data-category-filter="parenting-islami" aria-pressed="false">Parenting Islami</button>
+            <button class="category-filter" type="button" data-category-filter="cerita-aqiqah" aria-pressed="false">Cerita Aqiqah</button>
+          </div>
+          <p class="article-count" id="article-count" role="status" aria-live="polite">Menampilkan semua artikel.</p>
+        </nav>
+
         <div class="articles">
-          <article class="article-card">
+          <article class="article-card featured" data-category="panduan-aqiqah">
             <div class="article-top">
               <div class="article-image">
                 <img src="assets/mamaika-feast-C7epf1ZP.png" alt="Hidangan aqiqah tersaji untuk dinikmati bersama keluarga" loading="lazy">
               </div>
               <div class="article-copy">
-                <span class="category">Panduan dasar</span>
+                <span class="category">Panduan Aqiqah</span>
                 <h3>Mengenal aqiqah: ibadah syukur menyambut buah hati</h3>
                 <p class="article-summary">Apa makna aqiqah, kapan biasanya dilaksanakan, dan bagaimana keluarga bisa menyiapkannya tanpa terburu-buru?</p>
                 <details>
@@ -299,12 +354,12 @@
             </div>
           </article>
 
-          <article class="article-card">
+          <article class="article-card" data-category="panduan-aqiqah">
             <div class="article-image">
               <img src="assets/paket-putra-Bs0lZ3Ur.png" alt="Sajian paket aqiqah Mamaika" loading="lazy">
             </div>
             <div class="article-copy">
-              <span class="category">Memahami ketentuan</span>
+              <span class="category">Panduan Aqiqah</span>
               <h3>Aqiqah anak laki-laki dan perempuan: apa bedanya?</h3>
               <p class="article-summary">Memahami jumlah hewan yang dianjurkan dengan tenang, tanpa melupakan kemampuan keluarga.</p>
               <details>
@@ -318,12 +373,12 @@
             </div>
           </article>
 
-          <article class="article-card">
+          <article class="article-card" data-category="menu-aqiqah">
             <div class="article-image">
               <img src="assets/gallery-4-By0KPZbr.jpg" alt="Hidangan yang disiapkan untuk acara keluarga" loading="lazy">
             </div>
             <div class="article-copy">
-              <span class="category">Persiapan keluarga</span>
+              <span class="category">Menu Aqiqah</span>
               <h3>Menyiapkan hidangan aqiqah agar mudah dibagikan</h3>
               <p class="article-summary">Dari memperkirakan porsi sampai memilih menu, rencana sederhana bisa membuat hari pelaksanaan lebih nyaman.</p>
               <details>
@@ -337,12 +392,12 @@
             </div>
           </article>
 
-          <article class="article-card">
+          <article class="article-card" data-category="cerita-aqiqah">
             <div class="article-image">
               <img src="assets/aqiqah-momen-syukur.jpg" alt="Keluarga merayakan momen aqiqah bersama buah hati" loading="lazy">
             </div>
             <div class="article-copy">
-              <span class="category">Makna &amp; keluarga</span>
+              <span class="category">Cerita Aqiqah</span>
               <h3>Aqiqah: Wujud Syukur Orang Tua Atas Kehadiran Buah Hati dalam Keluarga</h3>
               <p class="article-summary">Aqiqah menjadi momen untuk mensyukuri kehadiran si kecil, berbagi kebahagiaan, dan mempererat hubungan keluarga.</p>
               <details>
@@ -364,6 +419,7 @@
             </div>
           </article>
         </div>
+        <p class="empty-state" id="empty-state" hidden>Belum ada artikel dalam kategori ini. Artikel baru akan hadir di sini.</p>
       </section>
 
       <section class="closing">
@@ -376,5 +432,35 @@
       <span>© <span id="year">2026</span> Mamaika. Cerita baik untuk keluarga.</span>
       <span>Jurnal ini berisi bacaan seputar aqiqah.</span>
     </footer>
+    <script>
+      const categoryFilters = document.querySelectorAll("[data-category-filter]");
+      const articleCards = document.querySelectorAll(".article-card[data-category]");
+      const articleCount = document.getElementById("article-count");
+      const emptyState = document.getElementById("empty-state");
+
+      articleCount.textContent = `Menampilkan semua ${articleCards.length} artikel.`;
+
+      categoryFilters.forEach((filter) => {
+        filter.addEventListener("click", () => {
+          const selectedCategory = filter.dataset.categoryFilter;
+          let visibleArticles = 0;
+
+          categoryFilters.forEach((button) => {
+            button.setAttribute("aria-pressed", String(button === filter));
+          });
+
+          articleCards.forEach((article) => {
+            const isVisible = selectedCategory === "all" || article.dataset.category === selectedCategory;
+            article.hidden = !isVisible;
+            if (isVisible) visibleArticles += 1;
+          });
+
+          articleCount.textContent = selectedCategory === "all"
+            ? `Menampilkan semua ${visibleArticles} artikel.`
+            : `${visibleArticles} artikel ditampilkan.`;
+          emptyState.hidden = visibleArticles > 0;
+        });
+      });
+    </script>
   </body>
 </html>
