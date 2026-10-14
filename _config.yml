@@ -1,5 +1,6 @@
 title: Jurnal Mamaika
 description: Cerita dan panduan seputar aqiqah, keluarga, dan momen syukur.
+url: https://blog.mamaika.my.id
 markdown: kramdown
 permalink: /artikel/:title/
 exclude:

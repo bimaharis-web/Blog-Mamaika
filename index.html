@@ -234,6 +234,39 @@
       details[open] summary::after { content: "−"; }
       .article-body { padding-top: 15px; }
       .article-body p:last-child { margin-bottom: 0; }
+      .share-tools {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-top: 20px;
+      }
+      .share-label {
+        width: 100%;
+        margin: 0 0 2px;
+        color: var(--brown-soft);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .share-link, .copy-link {
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--cream-light);
+        color: var(--brown);
+        font: 600 12px/1.2 var(--sans);
+      }
+      .share-link:hover, .copy-link:hover, .copy-link:focus-visible {
+        border-color: var(--orange);
+        color: var(--orange);
+      }
+      .copy-link { cursor: pointer; }
+      .share-status {
+        flex-basis: 100%;
+        margin: 0;
+        color: var(--olive);
+        font-size: 12px;
+      }
       .note {
         margin-top: 18px;
         padding: 13px 15px;
@@ -351,6 +384,17 @@
                   <summary>Baca selengkapnya</summary>
                   <div class="article-body">{{ post.content }}</div>
                 </details>
+                {% assign article_url = post.url | absolute_url %}
+                {% assign share_text = post.title | append: " " | append: article_url %}
+                <div class="share-tools" role="group" aria-label="Bagikan artikel">
+                  <p class="share-label">Bagikan artikel ini</p>
+                  <a class="share-link" href="https://wa.me/?text={{ share_text | uri_escape }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                  <a class="share-link" href="https://www.facebook.com/sharer/sharer.php?u={{ article_url | uri_escape }}" target="_blank" rel="noopener noreferrer">Facebook</a>
+                  <a class="share-link" href="https://t.me/share/url?url={{ article_url | uri_escape }}&amp;text={{ post.title | uri_escape }}" target="_blank" rel="noopener noreferrer">Telegram</a>
+                  <a class="share-link" href="https://twitter.com/intent/tweet?text={{ post.title | uri_escape }}&amp;url={{ article_url | uri_escape }}" target="_blank" rel="noopener noreferrer">X</a>
+                  <button class="copy-link" type="button" data-copy-link="{{ article_url | escape }}">Salin tautan</button>
+                  <p class="share-status" role="status" aria-live="polite" hidden></p>
+                </div>
               </div>
             {% if forloop.first %}
             </div>
@@ -376,6 +420,22 @@
       const articleCards = document.querySelectorAll(".article-card[data-category]");
       const articleCount = document.getElementById("article-count");
       const emptyState = document.getElementById("empty-state");
+
+      document.querySelectorAll("[data-copy-link]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const shareTools = button.closest(".share-tools");
+          const status = shareTools.querySelector(".share-status");
+
+          try {
+            await navigator.clipboard.writeText(button.dataset.copyLink);
+            status.textContent = "Tautan artikel berhasil disalin.";
+          } catch (error) {
+            status.textContent = "Tautan tidak dapat disalin. Silakan salin alamat artikel dari bilah alamat.";
+          }
+
+          status.hidden = false;
+        });
+      });
 
       articleCount.textContent = `Menampilkan semua ${articleCards.length} artikel.`;
 
