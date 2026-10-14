@@ -1,0 +1,6 @@
+title: Jurnal Mamaika
+description: Cerita dan panduan seputar aqiqah, keluarga, dan momen syukur.
+markdown: kramdown
+permalink: /artikel/:title/
+exclude:
+  - admin/README.md

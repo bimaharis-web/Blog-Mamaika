@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="id">
   <head>
@@ -332,92 +334,29 @@
         </nav>
 
         <div class="articles">
-          <article class="article-card featured" data-category="panduan-aqiqah">
+          {% assign articles = site.posts | sort: "date" | reverse %}
+          {% for post in articles %}
+          <article class="article-card{% if forloop.first %} featured{% endif %}" data-category="{{ post.category | slugify }}">
+            {% if forloop.first %}
             <div class="article-top">
+            {% endif %}
               <div class="article-image">
-                <img src="assets/mamaika-feast-C7epf1ZP.png" alt="Hidangan aqiqah tersaji untuk dinikmati bersama keluarga" loading="lazy">
+                <img src="{{ post.image | relative_url }}" alt="{{ post.image_alt | default: post.title | escape }}" loading="lazy">
               </div>
               <div class="article-copy">
-                <span class="category">Panduan Aqiqah</span>
-                <h3>Mengenal aqiqah: ibadah syukur menyambut buah hati</h3>
-                <p class="article-summary">Apa makna aqiqah, kapan biasanya dilaksanakan, dan bagaimana keluarga bisa menyiapkannya tanpa terburu-buru?</p>
+                <span class="category">{{ post.category | escape }}</span>
+                <h3>{{ post.title | escape }}</h3>
+                <p class="article-summary">{{ post.summary | escape }}</p>
                 <details>
                   <summary>Baca selengkapnya</summary>
-                  <div class="article-body">
-                    <p>Aqiqah adalah salah satu bentuk rasa syukur kepada Allah atas kelahiran seorang anak. Dalam pelaksanaannya, keluarga menyembelih hewan sesuai tuntunan, lalu dagingnya dapat dibagikan dan dinikmati bersama.</p>
-                    <p>Hari ketujuh setelah kelahiran sering disebut sebagai waktu yang dianjurkan dalam hadis. Bila belum memungkinkan, keluarga dapat mencari waktu lain sesuai kemampuan dan mengikuti pandangan ulama yang dipercaya. Tidak perlu menjadikan persiapan sebagai beban—sesuaikan dengan keadaan keluarga.</p>
-                    <p>Mulailah dengan memahami ketentuan dasar, menentukan rencana yang realistis, lalu memilih cara pengolahan dan pembagian yang nyaman. Aqiqah adalah momen ibadah dan syukur; kesederhanaan tetap bermakna.</p>
-                    <p class="note">Bacaan ini bersifat pengantar. Untuk pertanyaan hukum yang lebih khusus, silakan berkonsultasi dengan ustaz atau ulama yang Anda percaya.</p>
-                  </div>
+                  <div class="article-body">{{ post.content }}</div>
                 </details>
               </div>
+            {% if forloop.first %}
             </div>
+            {% endif %}
           </article>
-
-          <article class="article-card" data-category="panduan-aqiqah">
-            <div class="article-image">
-              <img src="assets/paket-putra-Bs0lZ3Ur.png" alt="Sajian paket aqiqah Mamaika" loading="lazy">
-            </div>
-            <div class="article-copy">
-              <span class="category">Panduan Aqiqah</span>
-              <h3>Aqiqah anak laki-laki dan perempuan: apa bedanya?</h3>
-              <p class="article-summary">Memahami jumlah hewan yang dianjurkan dengan tenang, tanpa melupakan kemampuan keluarga.</p>
-              <details>
-                <summary>Baca selengkapnya</summary>
-                <div class="article-body">
-                  <p>Dalam hadis yang diriwayatkan dari Ummu Kurz, disebutkan dua kambing yang sepadan untuk anak laki-laki dan satu kambing untuk anak perempuan. Riwayat ini menjadi dasar anjuran yang banyak dijelaskan para ulama.</p>
-                  <p>Ketentuan tersebut adalah panduan ibadah, bukan alasan untuk memaksakan diri. Rencana pelaksanaan sebaiknya mempertimbangkan kemampuan dan keadaan keluarga. Jika ada kondisi khusus atau pertanyaan tentang penerapannya, mintalah penjelasan dari ulama yang Anda percaya.</p>
-                  <p class="note">Fokuskan persiapan pada niat syukur dan pelaksanaan yang baik, bukan pada kemewahan acara.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-
-          <article class="article-card" data-category="menu-aqiqah">
-            <div class="article-image">
-              <img src="assets/gallery-4-By0KPZbr.jpg" alt="Hidangan yang disiapkan untuk acara keluarga" loading="lazy">
-            </div>
-            <div class="article-copy">
-              <span class="category">Menu Aqiqah</span>
-              <h3>Menyiapkan hidangan aqiqah agar mudah dibagikan</h3>
-              <p class="article-summary">Dari memperkirakan porsi sampai memilih menu, rencana sederhana bisa membuat hari pelaksanaan lebih nyaman.</p>
-              <details>
-                <summary>Baca selengkapnya</summary>
-                <div class="article-body">
-                  <p>Sebelum memilih menu, perkirakan jumlah keluarga dan tetangga yang akan menerima hidangan. Catat kebutuhan sejak awal agar porsi, wadah, dan waktu pengantaran bisa disiapkan dengan baik.</p>
-                  <p>Pilih olahan yang disukai penerima dan tetap nyaman disantap setelah dibagikan. Pastikan makanan dikemas bersih, tertutup rapat, dan diberi label bila ada informasi penting. Jika bekerja dengan penyedia jasa, sepakati jumlah, menu, waktu, serta area pengiriman sejak awal.</p>
-                  <p>Bagikan dengan cara yang sesuai kebiasaan keluarga dan lingkungan. Tidak harus berupa acara besar: yang utama adalah pelaksanaan yang baik dan berbagi dengan ikhlas.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-
-          <article class="article-card" data-category="cerita-aqiqah">
-            <div class="article-image">
-              <img src="assets/aqiqah-momen-syukur.jpg" alt="Keluarga merayakan momen aqiqah bersama buah hati" loading="lazy">
-            </div>
-            <div class="article-copy">
-              <span class="category">Cerita Aqiqah</span>
-              <h3>Aqiqah: Wujud Syukur Orang Tua Atas Kehadiran Buah Hati dalam Keluarga</h3>
-              <p class="article-summary">Aqiqah menjadi momen untuk mensyukuri kehadiran si kecil, berbagi kebahagiaan, dan mempererat hubungan keluarga.</p>
-              <details>
-                <summary>Baca selengkapnya</summary>
-                <div class="article-body">
-                  <p>Kehadiran seorang anak merupakan anugerah terbesar yang Allah berikan kepada sebuah keluarga. Tangisan pertama bayi menjadi momen penuh haru yang mengubah kehidupan orang tua. Setelah melewati proses panjang kehamilan dan persalinan, orang tua memiliki kesempatan untuk menunjukkan rasa syukur melalui berbagai bentuk ibadah, salah satunya adalah aqiqah.</p>
-                  <p>Aqiqah bukan hanya sebuah tradisi keluarga, tetapi juga bagian dari ibadah yang memiliki nilai spiritual. Melalui aqiqah, orang tua mengungkapkan rasa terima kasih kepada Allah atas karunia seorang anak sekaligus berbagi kebahagiaan dengan keluarga, tetangga, dan masyarakat sekitar. Baca juga <a href="https://hijra.id/blog/articles/panduan-aqiqah-anak/?utm_source=chatgpt.com" target="_blank" rel="noreferrer">panduan aqiqah anak dari Hijra</a>.</p>
-                  <h4>Makna Aqiqah dalam Kehidupan Keluarga</h4>
-                  <p>Secara sederhana, aqiqah adalah penyembelihan hewan sebagai bentuk rasa syukur atas kelahiran seorang anak. Tradisi ini menjadi simbol bahwa seorang anak hadir membawa kebahagiaan dan keberkahan bagi keluarga.</p>
-                  <p>Lebih dari sekadar acara makan bersama, aqiqah mengandung pesan penting tentang kepedulian sosial. Daging aqiqah dapat dibagikan kepada kerabat, tetangga, maupun orang yang membutuhkan sehingga kebahagiaan kelahiran anak dapat dirasakan lebih luas. Simak juga <a href="https://www.cimbniaga.co.id/id/inspirasi/perencanaan/tata-cara-dan-hukum-menggunakan-jasa-layanan-aqiqah?utm_source=chatgpt.com" target="_blank" rel="noreferrer">ulasan tata cara dan hukum menggunakan jasa layanan aqiqah dari CIMB Niaga</a>.</p>
-                  <h4>Aqiqah Mengajarkan Nilai Berbagi</h4>
-                  <p>Dalam keluarga Muslim, aqiqah menjadi momen pendidikan pertama bagi anak, meskipun ia belum memahami maknanya. Orang tua menanamkan nilai bahwa setiap nikmat yang diterima patut disyukuri dan dibagikan kepada sesama.</p>
-                  <p>Anak yang tumbuh dalam keluarga yang membiasakan rasa syukur akan lebih mudah memahami pentingnya berbagi, peduli, dan menghargai orang lain.</p>
-                  <h4>Membangun Kenangan Indah Bersama Keluarga</h4>
-                  <p>Acara aqiqah juga menjadi kesempatan mempererat hubungan keluarga besar. Kehadiran kakek, nenek, saudara, dan sahabat menjadikan momen kelahiran anak semakin berkesan.</p>
-                  <p>Bagi orang tua, aqiqah bukan hanya tentang memenuhi sebuah amalan, tetapi juga menciptakan kenangan indah yang akan menjadi bagian dari perjalanan keluarga.</p>
-                </div>
-              </details>
-            </div>
-          </article>
+          {% endfor %}
         </div>
         <p class="empty-state" id="empty-state" hidden>Belum ada artikel dalam kategori ini. Artikel baru akan hadir di sini.</p>
       </section>

@@ -1,0 +1,58 @@
+backend:
+  name: turbo-github
+  turbo_site_id: REPLACE_WITH_DECAP_TURBO_SITE_ID
+  branch: main
+
+locale: id
+media_folder: assets/uploads
+public_folder: /assets/uploads
+publish_mode: simple
+slug:
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: posts
+    label: Artikel
+    label_singular: Artikel
+    folder: _posts
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} · {{category}}"
+    fields:
+      - label: Judul
+        name: title
+        widget: string
+      - label: Tanggal terbit
+        name: date
+        widget: datetime
+        date_format: "YYYY-MM-DD"
+        time_format: "HH:mm"
+        format: "YYYY-MM-DD HH:mm:ss Z"
+      - label: Kategori
+        name: category
+        widget: select
+        options:
+          - Panduan Aqiqah
+          - Persiapan Aqiqah
+          - Menu Aqiqah
+          - Doa & Ibadah
+          - Keluarga Muslim
+          - Parenting Islami
+          - Cerita Aqiqah
+      - label: Ringkasan
+        name: summary
+        widget: text
+      - label: Gambar artikel
+        name: image
+        widget: image
+        required: true
+      - label: Deskripsi gambar
+        name: image_alt
+        widget: string
+        required: false
+      - label: Isi artikel
+        name: body
+        widget: markdown
