@@ -5,6 +5,7 @@ category: Doa & Ibadah
 summary: '"Harta dan anak-anak adalah perhiasan kehidupan dunia, tetapi amal
   kebajikan yang terus-menerus adalah lebih baik pahalanya di sisi Tuhanmu serta
   lebih baik untuk menjadi harapan." (QS. Al-Kahfi: 46)'
+image: /assets/uploads/anak-salat_169.jpeg
 ---
 ## Kelahiran Anak, Nikmat Besar yang Menghadirkan Amanah
 
